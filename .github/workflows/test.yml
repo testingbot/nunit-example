@@ -10,4 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.1.0
       - run: dotnet test
+        env:
+          TESTINGBOT_KEY: ${{ secrets.TESTINGBOT_KEY }}
+          TESTINGBOT_SECRET: ${{ secrets.TESTINGBOT_SECRET }}
 
