@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
@@ -88,6 +89,7 @@ public class Tests
             {
                 // Terminates the remote webdriver session
                 driver.Quit();
+                driver.Dispose();
             }
         }
     }
