@@ -1,5 +1,4 @@
-﻿using NUnit.Framework;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
@@ -70,7 +69,7 @@ public class Tests
         public void GoogleTest()
         {
             driver.Navigate().GoToUrl("http://www.google.com");
-            StringAssert.Contains("Google", driver.Title);
+            Assert.That(driver.Title, Is.EqualTo("Google"));
             IWebElement query = driver.FindElement(By.Name("q"));
             query.SendKeys("TestingBot");
             query.Submit();
