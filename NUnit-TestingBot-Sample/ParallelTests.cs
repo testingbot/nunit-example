@@ -6,17 +6,19 @@ using OpenQA.Selenium.Safari;
 
 namespace NUnit_TestingBot_Sample;
 
-public class Tests
+public class ParallelTests
 {
     [TestFixture("chrome", "latest", "Windows 10")]
-    public class TbNUnit_Test
+    [TestFixture("firefox", "latest", "SONOMA")]
+    [Parallelizable(ParallelScope.Fixtures)]
+    public class TbNUnit_ParallelTest
     {
         private IWebDriver driver;
         private string browser;
         private string version;
         private string os;
 
-        public TbNUnit_Test(String browser, String version, String os)
+        public TbNUnit_ParallelTest(String browser, String version, String os)
         {
             this.browser = browser;
             this.version = version;

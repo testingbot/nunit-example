@@ -1,3 +1,5 @@
+[![Tests](https://github.com/testingbot/nunit-example/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/testingbot/nunit-example/actions/workflows/test.yml)
+
 ## TestingBot - NUnit
 
 TestingBot provides an online grid of browsers and mobile devices to run Automated tests on via Selenium WebDriver.
@@ -23,6 +25,13 @@ This example demonstrates how to use NUnit to run a test in parallel across seve
 
 ### Running your tests from Test Explorer via NUnit Test Adapter
 Click Run Unit Tests, you will see the test result in the [TestingBot Dashboard](https://testingbot.com/members/)
+
+### Parallel testing
+There's an example on how to perform parallel testing. This will run two or more tests simultaneously, shortening the total test duration.
+To run the Parallel test, please use this command:
+```
+dotnet test --filter "Parallel"
+```
 
 ### Resources
 ##### [TestingBot Documentation](https://testingbot.com/support/)
