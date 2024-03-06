@@ -31,8 +31,7 @@ public class Tests
             var chromeOptions = new ChromeOptions()
             {
                 BrowserVersion = "latest",
-                PlatformName = "Windows 10",
-                UseSpecCompliantProtocol = true
+                PlatformName = "Windows 10"
             };
             var tbOptions = new Dictionary<string, string>
             {
