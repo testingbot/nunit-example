@@ -1,16 +1,72 @@
 ---
 name: Tests
 
-on: push
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
 
 jobs:
-  tests:
-    name: Unit Testing
-    runs-on: windows-latest
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        test-category: [Basic, Parallel, BiDi]
+    
     steps:
-      - uses: actions/checkout@v2.1.0
-      - run: dotnet test
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+        
+      - name: Run tests
+        run: |
+          if [ "${{ matrix.test-category }}" == "Basic" ]; then
+            dotnet test --no-build --configuration Release --logger trx --results-directory TestResults/ --filter "TestCategory!=Parallel&TestCategory!=BiDi"
+          elif [ "${{ matrix.test-category }}" == "Parallel" ]; then
+            dotnet test --no-build --configuration Release --logger trx --results-directory TestResults/ --filter "TestCategory=Parallel"
+          else
+            dotnet test --no-build --configuration Release --logger trx --results-directory TestResults/ --filter "TestCategory=BiDi"
+          fi
         env:
           TESTINGBOT_KEY: ${{ secrets.TESTINGBOT_KEY }}
           TESTINGBOT_SECRET: ${{ secrets.TESTINGBOT_SECRET }}
+          
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ matrix.test-category }}
+          path: TestResults/
+          
+  lint-and-analyze:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Restore dependencies
+        run: dotnet restore
+        
+      - name: Build and analyze
+        run: dotnet build --configuration Release --verbosity normal
 

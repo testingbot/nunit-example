@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <RunConfiguration>
+    <MaxCpuCount>4</MaxCpuCount>
+    <ResultsDirectory>./TestResults</ResultsDirectory>
+  </RunConfiguration>
+  
+  <NUnit>
+    <NumberOfTestWorkers>4</NumberOfTestWorkers>
+    <DefaultTimeout>60000</DefaultTimeout>
+    <WorkDirectory>./TestResults</WorkDirectory>
+    <InternalTraceLevel>Info</InternalTraceLevel>
+    <RandomSeed>1234567890</RandomSeed>
+    <DefaultTestNamePattern>{c}.{m}</DefaultTestNamePattern>
+  </NUnit>
+  
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+          <Format>opencover</Format>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
