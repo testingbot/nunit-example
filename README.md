@@ -7,31 +7,24 @@ This example demonstrates how to use NUnit to run a test in parallel across seve
 
 ### Environment Setup
 
-1. Global Dependencies
-    * MS Visual Studio 2022 or later.
-    * Install the NUnit and NUnit3TestAdapter packages through NuGet
-
-2. TestingBot Credentials
+1. TestingBot Credentials
     * Add your TestingBot Key and Secret as environmental variables. You can find these in the [TestingBot Dashboard](https://testingbot.com/members/).
     ```
     $ export TESTINGBOT_KEY=<your TestingBot Key>
     $ export TESTINGBOT_SECRET=<your TestingBot Secret>
     ```
 
-3. Setup
+2. Setup
     * Clone the repo
-	* Open the solution `NUnit-TestingBot-Sample.sln` in Visual Studio 2022 or higher
-	* Build the solution
+
+3. Run tests
+    * Single test: `dotnet test --filter "Single"`
+    * Paralle tests: `dotnet test --filter "Parallel"` (run 2 tests simultaneously)
+    * DevTools test: `dotnet test --filter "DevTools"`
 
 ### Running your tests from Test Explorer via NUnit Test Adapter
 Click Run Unit Tests, you will see the test result in the [TestingBot Dashboard](https://testingbot.com/members/)
 
-### Parallel testing
-There's an example on how to perform parallel testing. This will run two or more tests simultaneously, shortening the total test duration.
-To run the Parallel test, please use this command:
-```
-dotnet test --filter "Parallel"
-```
 
 ### Resources
 ##### [TestingBot Documentation](https://testingbot.com/support/)
