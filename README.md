@@ -20,14 +20,15 @@ This example demonstrates how to use NUnit to run a test in parallel across seve
 3. Run tests
     * Single test: `dotnet test --filter "Single"`
     * Paralle tests: `dotnet test --filter "Parallel"` (run 2 tests simultaneously)
-    * DevTools test: `dotnet test --filter "DevTools"`
+    * DevTools (CDP) test: `dotnet test --filter "DevTools"` (runs a CDP test)
+    * WebDriver BiDi test: `dotnet test --filter "BiDi"`
 
 ### Running your tests from Test Explorer via NUnit Test Adapter
 Click Run Unit Tests, you will see the test result in the [TestingBot Dashboard](https://testingbot.com/members/)
 
 
 ### Resources
-##### [TestingBot Documentation](https://testingbot.com/support/)
+##### [TestingBot Documentation](hhttps://testingbot.com/support/web-automate/selenium/csharp/nunit)
 
 ##### [SeleniumHQ Documentation](http://www.seleniumhq.org/docs/)
 
