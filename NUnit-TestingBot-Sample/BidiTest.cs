@@ -45,19 +45,25 @@ namespace NUnit_TestingBot_Sample
         [Test]
         public async Task CaptureNetworkLog()
         {
-            _driver.Navigate().GoToUrl("https://www.selenium.dev/selenium/web/bidi/logEntryAdded.html");
-            var bidi = await _driver.AsBiDiAsync();
+            var responses = new System.Collections.Concurrent.ConcurrentBag<string>();
+            await using var bidi = await _driver.AsBiDiAsync();
 
             await bidi.Network.OnResponseStartedAsync(res =>
             {
-                Console.WriteLine($"URL: {res.Request.Url}");
-                Console.WriteLine($"Method: {res.Request.Method}");
-                Console.WriteLine($"Status: {res.Response.Status}");
-                Console.WriteLine($"Headers: {string.Join(", ", res.Response.Headers.Select(h => $"{h.Name}: {h.Value}"))}");
+                responses.Add(res.Request.Url);
+                Console.WriteLine($"{res.Request.Method} {res.Request.Url} -> {res.Response.Status}");
             });
 
-            _driver.FindElement(By.Id("jsException")).Click();
-            System.Threading.Thread.Sleep(4000);
+            _driver.Navigate().GoToUrl("https://testingbot.com");
+
+            var deadline = DateTime.UtcNow.AddSeconds(10);
+            while (responses.IsEmpty && DateTime.UtcNow < deadline)
+            {
+                await Task.Delay(250);
+            }
+
+            Assert.That(responses, Has.Some.StartsWith("https://testingbot.com"),
+                "Expected BiDi to report at least one response from testingbot.com");
         }
 
         [TearDown]

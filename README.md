@@ -5,6 +5,10 @@
 TestingBot provides an online grid of browsers and mobile devices to run Automated tests on via Selenium WebDriver.
 This example demonstrates how to use NUnit to run a test in parallel across several browsers.
 
+### Requirements
+
+* [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) (the project targets `net9.0`; the .NET 8 SDK fails with `NETSDK1045`)
+
 ### Environment Setup
 
 1. TestingBot Credentials
@@ -18,19 +22,19 @@ This example demonstrates how to use NUnit to run a test in parallel across seve
     * Clone the repo
 
 3. Run tests
-    * Single test: `dotnet test --filter "Single"`
-    * Paralle tests: `dotnet test --filter "Parallel"` (run 2 tests simultaneously)
-    * DevTools (CDP) test: `dotnet test --filter "DevTools"` (runs a CDP test)
-    * WebDriver BiDi test: `dotnet test --filter "BiDi"`
+    * Single test: `dotnet test --filter "TestCategory=Single"`
+    * Parallel tests: `dotnet test --filter "TestCategory=Parallel"` (runs 2 tests simultaneously)
+    * DevTools (CDP) test: `dotnet test --filter "TestCategory=DevTools"` (runs a CDP test)
+    * WebDriver BiDi test: `dotnet test --filter "TestCategory=BiDi"`
 
 ### Running your tests from Test Explorer via NUnit Test Adapter
 Click Run Unit Tests, you will see the test result in the [TestingBot Dashboard](https://testingbot.com/members/)
 
 
 ### Resources
-##### [TestingBot Documentation](hhttps://testingbot.com/support/web-automate/selenium/csharp/nunit)
+##### [TestingBot Documentation](https://testingbot.com/support/web-automate/selenium/csharp/nunit)
 
-##### [SeleniumHQ Documentation](http://www.seleniumhq.org/docs/)
+##### [Selenium Documentation](https://www.selenium.dev/documentation/)
 
 ##### [NUnit Documentation](https://nunit.org/)
 
